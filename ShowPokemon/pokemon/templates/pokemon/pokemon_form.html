@@ -1,0 +1,55 @@
+{% extends "pokemon/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-sction">
+        <form method="POST">
+            {% csrf_token %}
+            <datalist id="pokemon-breeds">
+                {% for breed in breeds_list %}
+                    <option value="{{breed}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-types">
+                {% for type in types_list %}
+                    <option value="{{type}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-moves">
+                {% for move in moves_list %}
+                    <option value="{{move}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-abilities">
+                {% for ability in abilities_list %}
+                    <option value="{{ability}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-natures">
+                {% for nature in natures_list %}
+                    <option value="{{nature}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-items">
+                {% for item in items_list %}
+                    <option value="{{item}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-characteristics">
+                {% for characteristic in characteristics_list %}
+                    <option value="{{characteristic}}"></option>
+                {% endfor %}
+            </datalist>            
+            <fieldset class="form-group">
+                {% if 'new' in request.path %}
+                    <legend class="border-bottom mb-4">New Pokémon</legend>
+                {% else %}
+                    <legend class="border-bottom mb-4">Update Pokémon</legend>
+                {% endif %}
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "pokemon/base.html" %}
+{% block content %}
+    <h1>{{ user.username }}</h1>
+    <p>{{user.email}}</p>
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+                <p class="text-secondary">{{ user.profile.city }}, {{ user.profile.state }}, {{ user.profile.country }}</p>
+            </div>
+        </div>
+        <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'user-pokemon-roster' user.username %}">Roster</a>
+        <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'user-pokemon-teams' user.username %}">Teams</a>
+    </div>
+   
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends "pokemon/base.html" %}
+{% block content %}
+    <h1>Pokémon Home</h1>
+    <label for="pokemon-breed">Choose a Pokémon:</label>
+    <datalist id="pokemon-breeds">
+        <!-- <option value="Tapu Loco"></option> -->
+        {% for breed in context.breeds %}
+            <option value="{{ breed }}"></option>
+        {% endfor %}
+        
+    </datalist>
+    <img src="{{ context.karp }}" alt="no image">
+    <!-- <img src="media/pokemon/129.png" alt=""> -->
+    <input list="pokemon-breeds" name="pokemon-breed" id="pokemon-breed" autocomplete="on">
+    {% if request.user %}
+        <img class="rounded-circle account-img" src="{{ request.user.profile.image.url }}" alt="">
+        <br>
+        <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'team-create' %}">New Team</a>
+        <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'pokemon-create' %}">New Pokémon</a>
+    {% endif %}
+    <input type="time">
+
+
+{% endblock content %}

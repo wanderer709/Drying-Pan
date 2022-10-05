@@ -1,0 +1,13 @@
+body, input, textarea, select {
+    background: #fafafa;
+    color: #dadada;
+    background-color: #333333;
+}
+
+input[tpye="checkbox"] {
+    color:#333333
+}
+
+.rounded-lg {
+    border-radius: 1rem;
+}

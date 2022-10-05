@@ -1,0 +1,64 @@
+{% extends "pokemon/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-sction">
+        <form method="POST">
+            {% csrf_token %}
+            <datalist id="pokemon-games">
+                {% for game in games_list %}
+                    <option value="{{game}}"></option>
+                {% endfor %}
+            </datalist>
+            <datalist id="pokemon-regions">
+                {% for region in regions_list %}
+                    <option value="{{region}}"></option>
+                {% endfor %}
+            </datalist>
+            <fieldset class="form-group">
+                {% if 'new' in request.path %}
+                    <legend class="border-bottom mb-4">New Team</legend>
+                {% else %}
+                    <legend class="border-bottom mb-4">Update Team</legend>
+                {% endif %}
+                <datalist id="pokemon-breeds">
+                {% for breed in context.breeds %}
+                    <option value={{breed}}>
+                {% endfor %}
+                </datalist>
+                {{ form.name|as_crispy_field }}
+                {{ form.teamname|as_crispy_field }}
+                {{ form.victories|as_crispy_field }}
+                {{ form.formal_defeats|as_crispy_field }}
+                {{ form.total_defeats|as_crispy_field }}
+                {{ form.game|as_crispy_field }}
+                {{ form.region|as_crispy_field }}
+                {{ form.id_no|as_crispy_field }}
+                {{ form.pokedex_seen|as_crispy_field }}
+                {{ form.pokedex_caught|as_crispy_field }}
+                {{ form.money|as_crispy_field }}
+                {{ form.date_started|as_crispy_field }}
+                <div id="div_id_time" class="control-group">
+                    {{form.time_hours.errors}}
+                    {{form.time_minutes.errors}}
+                    <label for="time">Time</label>
+                    {{ form.time_hours }} : {{ form.time_minutes }}
+                </div>
+                {{ form.badges|as_crispy_field }}
+                {{ form.hall_of_fame|as_crispy_field }}
+                {{ form.main|as_crispy_field }}
+                {{ form.box|as_crispy_field }}
+                <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'pokemon-create' %}" target="_blank">New Pokémon</a>
+                {{ form.remarks|as_crispy_field }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- <script>
+        let popup = document.querySelector(".add-pokemon")
+        popup.addEventListener("click", function () {})
+
+    </script> -->
+{% endblock content %}

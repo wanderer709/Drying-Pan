@@ -1,0 +1,94 @@
+{% extends "pokemon/base.html" %}
+{% load mathfilters %}
+
+{% block content %}
+    <h1>Roster Page</h1>
+    <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'pokemon-create' %}">New Pokémon</a>
+
+    <div class="container">
+
+    {% for pokemon in pokemon %}
+
+        {% if forloop.counter|mod:2 != 0 %}
+            <div class="row text-center">
+        {% endif %}
+
+        <div class="col m-1 border border-3 border-info" style="border-radius: 1rem;">
+            <div class="container p-0">
+                <div class="row">
+                    <div class="col border-end border-3 border-info">
+                        <img class="m-1" src="{{ pokemon.sprite }}" alt="no image">
+                        <p class="m-1"><a class="link-primary" href="{% url 'pokemon-detail' pokemon.id %}">{{ pokemon.name }}</a></p>
+                        <p class="m-1">{{ pokemon.breed }}{{ pokemon.gender }} Lv. {{ pokemon.level }}</p>
+                    </div>
+                    <div class="col my-auto">
+                        <p class="m-1">Types: 
+                            {% if pokemon.type1 and pokemon.type1|lower in types_pics_list %}
+                                <img src="/media/types/{{ pokemon.type1 }}.png" alt="">
+                            {% elif pokemon.type1 %}
+                                {{pokemon.type1}}, 
+                            {% else %}
+                                <img src="/media/types/{{ pokemon.type_1 }}.png" alt="">
+                            {% endif %}
+                            {% if pokemon.type2 and pokemon.type2|lower in types_pics_list %}
+                                <img src="/media/types/{{ pokemon.type2 }}.png" alt="">
+                            {% elif pokemon.type2 %}
+                                {{pokemon.type2}}
+                            {% else %}
+                                <img src="/media/types/{{ pokemon.type_2 }}.png" alt="">
+                            {% endif %}
+                        </p>
+                        <p class="m-1">Ability: {{ pokemon.ability }}</p>
+                        <p class="m-1">Nature: {{ pokemon.nature }}</p>
+                        <p class="m-1">Held Item: {{ pokemon.item }}</p>
+                    </div>
+                </div>
+                <div class="row border-top border-3 border-info">
+                    <div class="col">
+                        <p class="m-1">{{ pokemon.move1 }}</p>
+                    </div>
+                    <div class="col">
+                        <p class="m-1">{{ pokemon.move2 }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="m-1">{{ pokemon.move3 }}</p>
+                    </div>            
+                    <div class="col">
+                        <p class="m-1">{{ pokemon.move4 }}</p>
+                    </div>
+                </div>
+            </div>                
+        </div>
+
+        {% if forloop.counter|mod:2 == 0 %}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+
+    </div>
+
+    {% if is_paginated %}
+
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+
+    {% endif %}
+{% endblock content %}

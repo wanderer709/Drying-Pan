@@ -1,0 +1,66 @@
+{% extends "pokemon/base.html" %}
+
+{% block content %}
+    <div class="container">
+        {% if pokemon.user == request.user %}
+            <div>
+                <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'pokemon-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'pokemon-delete' object.id %}">Delete</a>
+            </div>
+            <div>
+                <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'pokemon-create' %}">New Pokémon</a>
+            </div>
+        {% endif %}
+        <div class="row text-center">
+            <div class="col-4">
+                <img class="m-1" src="{{ object.sprite }}" alt="no image" height="300" width="300">
+                <h2 class="m-1">{{ object.name }}</h2>
+                <h2 class="m-1">{{ object.breed }}{{object.gender}} Lv.{{ object.level }}</h2>
+            </div>
+            <div class="col-4 my-auto">
+                <div class="row">
+                    <h5>Trainer: {{object.user }}</h5>
+                    <h5>Team: {{ object.team }}</h5>
+                    <h5>Game: {{ object.team.game }}</h5>
+                    <h5>Game Alias: {{object.team.name }}</h5>
+                    <h5>Type:
+                        {% if object.type1 and object.type1|lower in types_pics_list %}
+                            <img src="/media/types/{{ object.type1 }}.png" alt="">
+                        {% elif object.type1 %}
+                            {{object.type1}}, 
+                        {% else %}
+                            <img src="/media/types/{{ object.type_1 }}.png" alt="">
+                        {% endif %}
+                        {% if object.type2 and object.type2|lower in types_pics_list %}
+                            <img src="/media/types/{{ object.type2 }}.png" alt="">
+                        {% elif object.type2 %}
+                            {{object.type2}}
+                        {% else %}
+                            <img src="/media/types/{{ object.type_2 }}.png" alt="">
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="row">
+                    <h4 class="m-3">Moves</h4>
+                    <p class="m-1">{{ object.move1 }}</p>
+                    <p class="m-1">{{ object.move2 }}</p>
+                    <p class="m-1">{{ object.move3 }}</p>
+                    <p class="m-1">{{ object.move4 }}</p>
+                </div>
+            </div>
+            <div class="col-4 my-auto">
+                <p>HP: {{object.hp}}</p>
+                <p>Attack: {{object.attack}}</p>
+                <p>Defense: {{object.defense}}</p>
+                <p>Special Attack: {{object.spec_atk}}</p>
+                <p>Special Defense: {{object.spec_def}}</p>
+                <p>Speed: {{object.speed}}</p>
+            </div>
+        </div>
+        <p>Charactaristic: {{object.charactaristic}}</p>
+        <p>Met: {{object.met}}</p>
+        <p>Remarks: {{object.remarks}}</p>
+        <br>
+    </div>
+   
+{% endblock content %}

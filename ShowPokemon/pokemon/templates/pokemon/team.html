@@ -1,0 +1,38 @@
+{% extends "pokemon/base.html" %}
+{% block content %}
+    <h1>Teams Page</h1>
+    {% for team in context.teams %}
+        {% if team.user.is_authenticated %}
+            <p>Username: {{team.user.username}}</p>
+            <p>Name in Game: {{team.name}}</p>
+            <p>Team Name: {{team.teamname}}</p>
+            <p>Game: {{team.game}}</p>
+            <p>Region: {{team.region}}</p>
+            <p>Pokédex Seen-Caught: {{team.pokedex_seen}}-{{team.pokedex_caught}}</p>
+            <p>Money: {{team.money}}</p>
+            <p>Date Started: {{team.date_started|date:"F jS, Y"}}</p>
+            <p>Time: {{team.time_hours}}:{{team.time_minutes}}</p>
+            <p>Badges: {{team.badges}}</p>
+            <p>Hall of Fame: {{team.hall_of_fame|date:"F jS, Y"}}</p>
+            <p>Main: -</p>
+            <p>Also: -</p>
+            <p>Remarks: {{team.remarks}}</p>
+            <br>
+        {% endif %}
+        <!-- <p>Username: {{team.user.username}}</p>
+        <p>Name in Game: {{team.name}}</p>
+        <p>Team Name: {{team.teamname}}</p>
+        <p>Game: {{team.game}}</p>
+        <p>Region: {{team.region}}</p>
+        <p>Pokédex Seen-Caught: {{team.pokedex_seen}}-{{team.pokedex_caught}}</p>
+        <p>Money: {{team.money}}</p>
+        <p>Date Started: {{team.date_started|date:"F jS, Y"}}</p>
+        <p>Time: {{team.time_hours}}:{{team.time_minutes}}</p>
+        <p>Badges: {{team.badges}}</p>
+        <p>Hall of Fame: {{team.hall_of_fame|date:"F jS, Y"}}</p>
+        <p>Main: -</p>
+        <p>Also: -</p>
+        <p>Remarks: {{team.remarks}}</p>
+        <br> -->
+    {% endfor %}
+{% endblock content %}
