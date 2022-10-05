@@ -1,6 +1,6 @@
 # Drying Pan - A place to record and update your PokéEmpire
 
-- Website link: <dryingpan.org>
+- Website link: https://www.dryingpan.org/
 - Record, update, and show your progress as you play through almsot any Pokémon core series game.
 - You can record and show your individual pokémon including their moves, stats, natures, genders, items, all the way down to how and where you met them.
 - Your pokémon can be organized into teams from any of your games. You can put your pokémon into the main team (up to 6) and in your PC box.
