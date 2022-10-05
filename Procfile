@@ -1,1 +1,0 @@
-web: gunicorn ShowPokemon.wsgi
